@@ -1,0 +1,24 @@
+routing:
+  default_agent: "rag_agent"
+
+  agents:
+    rag_agent:
+      description: "Self-healing RAG for document Q&A"
+      triggers: ["question", "explain", "what is", "how does", "summarize"]
+      max_retries: 3
+      timeout: 60
+
+    tool_agent:
+      description: "Executes external API/DB tool calls"
+      triggers: ["search", "fetch", "calculate", "lookup", "query"]
+      max_retries: 2
+      timeout: 30
+
+    reflection_agent:
+      description: "Validates and reflects on previous answers"
+      triggers: ["verify", "check", "confirm", "validate"]
+      max_retries: 1
+      timeout: 20
+
+  fallback_agent: "rag_agent"
+  confidence_threshold: 0.65
